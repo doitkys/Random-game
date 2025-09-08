@@ -5,7 +5,7 @@
 //랜덤번호 < 유저번호 "DOWN!"
 //랜덤번호 >  유저번호 "UP!"
 //RESET버튼을 누르면 게임 리셋
-//5번의 기회를 다쓰면 게임이 끝. (더이상 추측 불가, 버튼이 disable)
+//5(->3)번의 기회를 다쓰면 게임이 끝. (더이상 추측 불가, 버튼이 disable)
 //유저가 1~100범위 밖에 숫자를 입력하면 알려주고 기회를 깍지 않는다.
 //유저가 이미 입력한 숫자를 또 입력하면 , 알려준다 , 기회를 깍지 않는다.
 
@@ -20,18 +20,20 @@ let chanceArea = document.getElementById('chance-area');
 let history = [];
 let answerArea = document.getElementById('answer-area');
 let pushNumber = document.getElementById('push-number');
-
+let circle = document.getElementById('circle');
 playButton.addEventListener('click', play);
 resetButton.addEventListener('click', reset);
 userInput.addEventListener('focus', function () {
   userInput.value = '';
 });
-
+answerArea.addEventListener('click', function () {
+  answerArea.textContent = `정답 : ${computerNum}`;
+});
 function pickRandomNumber() {
   computerNum = Math.floor(Math.random() * 100) + 1;
   console.log(`정답 ${computerNum}`);
   //처음부터 정답 등장하게 하기
-  answerArea.textContent = `정답 : ${computerNum}`;
+  // answerArea.textContent = `정답 : ${computerNum}`;
 }
 
 function play() {
@@ -48,17 +50,24 @@ function play() {
     return;
   }
   chances--;
+  // circle.style.visibility = 'hidden';
   console.log('chance', chances);
-  chanceArea.textContent = `남은기회 : ${chances}번`;
+
+  if (chances == 0) {
+    chanceArea.textContent = `찬스를 다 사용했습니다 !`;
+  } else {
+    chanceArea.textContent = `남은 찬스 : ${chances}번`;
+  }
   history.push(userValue);
   if (userValue < computerNum) {
-    resultArea.textContent = 'UP';
+    resultArea.textContent = 'UP ☝️';
   } else if (userValue > computerNum) {
-    resultArea.textContent = 'DOWN';
+    resultArea.textContent = 'DOWN👇';
   } else {
-    resultArea.textContent = '빙고!!!';
+    resultArea.textContent = '🎉 빙고!!!';
     userInput.disabled = true;
     gameOver = true;
+    chanceArea.textContent = `축하합니다 ${3 - chances}번만에 맞추셨습니다`;
   }
 
   pushNumber.textContent = `입력한 숫자: [${history.join(', ')}]`;
@@ -81,12 +90,12 @@ function reset() {
   userInput.value = '';
   //새로운 번호가 생성됨
   pickRandomNumber();
-  resultArea.textContent = '결과값이 나옵니다';
+  resultArea.textContent = '❓ 위 아래 위 아래 ❓';
   chanceArea.textContent = `남은기회 : ${chances}번`;
-
+  pushNumber.textContent = '입력했던 숫자';
+  answerArea.textContent = '클릭 시 정답 공개';
   playButton.disabled = false;
   userInput.disabled = false;
+  circle.style.visibility = 'visible';
 }
 pickRandomNumber();
-
-//리셋기능만들기

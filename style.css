@@ -1,0 +1,132 @@
+body {
+  height: 100vh;
+  font-family: 'Bagel Fat One', system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgb(230, 247, 168), rgb(158, 234, 130));
+}
+
+.container {
+  width: 500px;
+  height: 550px;
+  padding: 30px;
+  border-radius: 30px;
+  border: burlywood;
+  border: solid 1px black;
+  background-color: rgb(154, 239, 126);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+#circle {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+#circle > div {
+  /* background-color: rgb(234, 165, 182);
+  border-radius: 50%; */
+  padding: 5px;
+  margin: 5px;
+  font-size: 40px;
+}
+
+#user-input {
+  border-radius: 10px;
+  width: 240px;
+  height: 30px;
+  font-size: 15px;
+  padding: 3px;
+  border: none;
+}
+
+#play-button {
+  border-radius: 50%;
+  width: 60px;
+  height: 30px;
+  border: none;
+  margin-left: 10px;
+  background-color: rgb(59, 236, 106);
+}
+
+#reset-button {
+  border-radius: 10px;
+  margin: 20px;
+  border: none;
+  font-size: 30px;
+  background-color: rgb(59, 236, 106);
+}
+
+@keyframes fast {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.7);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+#circle div {
+  animation: fast 1s infinite;
+}
+
+@media screen and (max-width: 44rem) {
+  .container {
+    width: 85%;
+    /* max-width: 420px; */
+    padding: 15px;
+    border-radius: 20px;
+  }
+
+  h1 {
+    font-size: 8vw;
+    margin-bottom: 15px;
+  }
+
+  #user-input {
+    max-width: 100px;
+
+    font-size: 2.5vw;
+    margin-bottom: 10px;
+  }
+
+  #play-button {
+    width: 60px;
+    height: 40px;
+    margin-left: 5px;
+  }
+
+  #reset-button {
+    font-size: 4vw;
+    padding: 10px 15px;
+    margin: 15px;
+  }
+
+  #circle > div {
+    font-size: 6vw;
+    margin: 3px;
+  }
+  #answer-area,
+  #result-area,
+  #chance-area,
+  #push-number {
+    font-size: 5vw;
+    margin: 8px 0;
+  }
+}
